@@ -3,6 +3,7 @@ import userRoutes from "./routes/userRoutes.js";
 import sellerRoutes from "./routes/sellerRoutes.js";
 import {connectDB} from "./config/config.js";
 import cors from 'cors';
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(cors('*'))
 
 app.use('/',userRoutes)
 app.use('/',sellerRoutes)
+app.use('/',categoryRoutes)
 
 connectDB()
 

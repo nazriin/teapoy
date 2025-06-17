@@ -1,184 +1,170 @@
-import React, { useState } from "react";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCreateUserMutation, useCreateSellerMutation } from '../../services/authApi';
+import { toast } from 'react-toastify';
 
-const UserSignup = () => {
+const Signup = () => {
     const [formData, setFormData] = useState({
-        name: "",
-        surname: "",
-        email: "",
-        password: "",
-        phone: "",
-        role: "user", // user və seller seçilə bilər
-        address: {
-            street: "",
-            city: "",
-            state: "",
-            country: "",
-            zipCode: "",
-        },
+        name: '',
+        email: '',
+        password: '',
+        role: 'user',
+        storeName: '',
+        storeDescription: '',
     });
+    const [createUser, { isLoading: isUserLoading }] = useCreateUserMutation();
+    const [createSeller, { isLoading: isSellerLoading }] = useCreateSellerMutation();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
 
-        if (name.startsWith("address.")) {
-            const key = name.split(".")[1];
-            setFormData((prev) => ({
-                ...prev,
-                address: { ...prev.address, [key]: value },
-            }));
-        } else {
-            setFormData((prev) => ({
-                ...prev,
-                [name]: value,
-            }));
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Frontend validation
+        if (!formData.name || !formData.email || !formData.password) {
+            toast.error('Name, email, and password are required');
+            return;
+        }
+        if (formData.password.length < 6) {
+            toast.error('Password must be at least 6 characters');
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            toast.error('Invalid email address');
+            return;
+        }
+        if (formData.role === 'seller' && !formData.storeName) {
+            toast.error('Store name is required for sellers');
+            return;
+        }
+        if (formData.role === 'seller' && formData.storeDescription.length > 500) {
+            toast.error('Store description must be 500 characters or less');
+            return;
+        }
+
+        try {
+            const mutation = formData.role === 'user' ? createUser : createSeller;
+            const response = await mutation(formData).unwrap();
+            toast.success(response.message);
+
+            // Role-based redirection
+            if (response.user.role === 'user') {
+                navigate('/user/login');
+            } else if (response.user.role === 'seller') {
+                navigate('/seller/login');
+            }
+        } catch (error) {
+            const message =
+                error.data?.message ||
+                error.data?.errors?.[0]?.msg ||
+                'Failed to sign up';
+            toast.error(message);
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Form submitted:", formData);
-
-        // Burada Axios və ya Fetch ilə backende göndərə bilərsən
-        // Məs: axios.post("/api/users", formData)
-    };
-
     return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-            <div className="max-w-2xl w-full bg-white p-8 rounded-xl shadow-md">
-                <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
-                    Sign Up
-                </h2>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+                <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Name & Surname */}
-                    <div className="flex gap-4">
-                        <div className="w-1/2">
-                            <label className="block mb-1 font-medium">Name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                className="w-full border rounded px-3 py-2"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="w-1/2">
-                            <label className="block mb-1 font-medium">Surname</label>
-                            <input
-                                type="text"
-                                name="surname"
-                                className="w-full border rounded px-3 py-2"
-                                value={formData.surname}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-
-                    {/* Email */}
                     <div>
-                        <label className="block mb-1 font-medium">Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            className="w-full border rounded px-3 py-2"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
-                    {/* Password */}
-                    <div>
-                        <label className="block mb-1 font-medium">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            className="w-full border rounded px-3 py-2"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Phone */}
-                    <div>
-                        <label className="block mb-1 font-medium">Phone</label>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                            Name
+                        </label>
                         <input
                             type="text"
-                            name="phone"
-                            className="w-full border rounded px-3 py-2"
-                            value={formData.phone}
+                            id="name"
+                            name="name"
+                            value={formData.name}
                             onChange={handleChange}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            required
                         />
                     </div>
-
-                    {/* Role */}
                     <div>
-                        <label className="block mb-1 font-medium">Role</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+                            Role
+                        </label>
                         <select
+                            id="role"
                             name="role"
-                            className="w-full border rounded px-3 py-2"
                             value={formData.role}
                             onChange={handleChange}
-                            required
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         >
                             <option value="user">User</option>
                             <option value="seller">Seller</option>
                         </select>
                     </div>
-
-                    {/* Address */}
-                    <fieldset className="border border-gray-300 p-4 rounded">
-                        <legend className="text-sm text-gray-600 px-2">Address</legend>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input
-                                type="text"
-                                name="address.street"
-                                placeholder="Street"
-                                className="border rounded px-3 py-2"
-                                value={formData.address.street}
-                                onChange={handleChange}
-                            />
-                            <input
-                                type="text"
-                                name="address.city"
-                                placeholder="City"
-                                className="border rounded px-3 py-2"
-                                value={formData.address.city}
-                                onChange={handleChange}
-                            />
-                            <input
-                                type="text"
-                                name="address.state"
-                                placeholder="State"
-                                className="border rounded px-3 py-2"
-                                value={formData.address.state}
-                                onChange={handleChange}
-                            />
-                            <input
-                                type="text"
-                                name="address.country"
-                                placeholder="Country"
-                                className="border rounded px-3 py-2"
-                                value={formData.address.country}
-                                onChange={handleChange}
-                            />
-                            <input
-                                type="text"
-                                name="address.zipCode"
-                                placeholder="Zip Code"
-                                className="border rounded px-3 py-2"
-                                value={formData.address.zipCode}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </fieldset>
-
-                    {/* Submit Button */}
+                    {formData.role === 'seller' && (
+                        <>
+                            <div>
+                                <label htmlFor="storeName" className="block text-sm font-medium text-gray-700">
+                                    Store Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="storeName"
+                                    name="storeName"
+                                    value={formData.storeName}
+                                    onChange={handleChange}
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="storeDescription" className="block text-sm font-medium text-gray-700">
+                                    Store Description (Optional)
+                                </label>
+                                <textarea
+                                    id="storeDescription"
+                                    name="storeDescription"
+                                    value={formData.storeDescription}
+                                    onChange={handleChange}
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                                    rows="4"
+                                />
+                            </div>
+                        </>
+                    )}
                     <button
                         type="submit"
-                        className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition"
+                        disabled={isUserLoading || isSellerLoading}
+                        className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 disabled:bg-indigo-400"
                     >
-                        Sign Up
+                        {isUserLoading || isSellerLoading ? 'Signing Up...' : 'Sign Up'}
                     </button>
                 </form>
             </div>
@@ -186,4 +172,4 @@ const UserSignup = () => {
     );
 };
 
-export default UserSignup;
+export default Signup;

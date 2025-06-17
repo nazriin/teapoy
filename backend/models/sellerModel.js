@@ -28,4 +28,6 @@ const sellerSchema = new mongoose.Schema(
 // Ensure unique index with case-insensitive store names
 sellerSchema.index({ storeName: 1 }, { unique: true, collation: { locale: "en", strength: 2 } });
 
-export default mongoose.model("Seller", sellerSchema);
+const Seller = mongoose.model("Seller", sellerSchema);
+
+export default Seller;

@@ -14,8 +14,8 @@ const router = express.Router();
 
 router
     .get("/user",getAllUsers)
-    .post("/user",createUser)
-    .post("/user/login",loginUser)
+    .post("/api/user",createUser)
+    .post("/api/user/login",loginUser)
     .post("/user/logout",logout)
     .get("/user/:id",getUser)
     .put("/user/:id",updateUser)
