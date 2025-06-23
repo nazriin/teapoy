@@ -55,7 +55,7 @@ const Header = () => {
                         <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-orange-500 transition-colors">SHOP</Link>
                         <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-orange-500 transition-colors">BLOG</Link>
                         <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-orange-500 transition-colors">PAGES</Link>
-                        <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-orange-500 transition-colors">CONTACT</Link>
+                        <Link to='/contact' className="text-gray-600 dark:text-gray-300 hover:text-orange-500 transition-colors">CONTACT</Link>
                     </div>
 
                     {/* Right Icons */}

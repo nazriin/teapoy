@@ -6,6 +6,7 @@ import SignUp from "./pages/signup/SignUp.jsx";
 import {ToastContainer} from "react-toastify";
 import UserLogin from "./pages/login/UserLogin.jsx";
 import SellerLogin from "./pages/login/SellerLogin.jsx";
+import Contact from "./pages/contact/Contact.jsx";
 
 const Router = () => {
     return (
@@ -17,6 +18,7 @@ const Router = () => {
                    <Route path="/signup" element={<SignUp/>} />
                    <Route path="/user/login" element={<UserLogin/>} />
                    <Route path="/seller/login" element={<SellerLogin/>} />
+                   <Route path="/contact" element={<Contact/>} />
                </Routes>
            </BrowserRouter>
         </>
