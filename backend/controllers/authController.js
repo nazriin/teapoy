@@ -1,4 +1,3 @@
-
 import { Seller } from '../models/sellerModel.js';
 import { generateToken } from '../utils/generateToken.js';
 import UserModel from "../models/userModel.js";
@@ -27,7 +26,16 @@ export const register = async (req, res) => {
             await seller.save();
         }
 
-        res.status(201).json({ message: "Registration successful", role });
+        // Call generateToken here after successful registration
+        generateToken(res, user._id); // Pass the response object and the user's ID
+
+        res.status(201).json({
+            message: "Registration successful",
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -51,26 +59,28 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Incorrect password." });
         }
 
-        const token = generateToken(user._id, user.role);
+        // Call generateToken here after successful login
+        generateToken(res, user._id); // Pass the response object and the user's ID
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: 'lax'
+        res.json({
+            message: "Login successful",
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
         });
-
-        res.json({ message: "Login successful", role: user.role });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
 export const logout = (req, res) => {
-    res.clearCookie('token');
+    // Ensure you clear the 'jwt' cookie as named in your generateToken function
+    res.clearCookie('jwt');
     res.json({ message: "Logged out successfully" });
 };
 
 export const getCurrentUser = async (req, res) => {
+    // This function assumes you have middleware that populates req.user based on the JWT
     res.status(200).json(req.user);
 };
-
