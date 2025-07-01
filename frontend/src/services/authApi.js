@@ -4,37 +4,32 @@ export const authApi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:5000/api',
+        credentials: 'include',
     }),
     endpoints: (builder) => ({
-        createUser: builder.mutation({
-            query: (userData) => ({
-                url: '/user',
+        signupUser: builder.mutation({
+            query: (data) => ({
+                url: '/auth/register',
                 method: 'POST',
-                body: userData,
-            }),
-        }),
-        createSeller: builder.mutation({
-            query: (userData) => ({
-                url: '/seller',
-                method: 'POST',
-                body: userData,
+                body: data,
             }),
         }),
         loginUser: builder.mutation({
-            query: (credentials) => ({
-                url: '/user/login',
+            query: (data) => ({
+                url: '/auth/login',
                 method: 'POST',
-                body: credentials,
+                body: data,
             }),
         }),
-        loginSeller: builder.mutation({
-            query: (credentials) => ({
-                url: '/seller/login',
-                method: 'POST',
-                body: credentials,
+        getCurrentUser: builder.query({
+            query: () => ({
+                url: '/auth/me',
+                method: 'GET',
+                credentials: 'include',
             }),
         }),
     }),
 });
 
-export const { useCreateUserMutation, useCreateSellerMutation, useLoginUserMutation, useLoginSellerMutation } = authApi;
+export const { useSignupUserMutation, useLoginUserMutation, useGetCurrentUserQuery } = authApi;
+

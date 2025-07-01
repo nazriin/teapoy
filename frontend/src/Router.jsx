@@ -7,6 +7,13 @@ import {ToastContainer} from "react-toastify";
 import UserLogin from "./pages/login/UserLogin.jsx";
 import SellerLogin from "./pages/login/SellerLogin.jsx";
 import Contact from "./pages/contact/Contact.jsx";
+import SellerHomepage from "./pages/seller/SellerHomepage.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import UserDashboard from "./pages/user/UserDashboard.jsx";
+import SellerDashboard from "./pages/seller/SellerDashboard.jsx";
+import HospitalityAboutSection from "./pages/about/HospitalityAboutSection.jsx";
+import AboutUs from "./pages/about/AboutUS.jsx";
+import FAQ from "./pages/faq/Faq.jsx";
 
 const Router = () => {
     return (
@@ -19,6 +26,26 @@ const Router = () => {
                    <Route path="/user/login" element={<UserLogin/>} />
                    <Route path="/seller/login" element={<SellerLogin/>} />
                    <Route path="/contact" element={<Contact/>} />
+                   <Route path="/seller" element={<SellerHomepage/>} />
+                   <Route path="/about" element={<AboutUs/>} />
+                   <Route path="/faq" element={<FAQ/>} />
+
+                   <Route
+                       path="/user-dashboard"
+                       element={
+                           <ProtectedRoute allowedRoles={['user']}>
+                               <UserDashboard />
+                           </ProtectedRoute>
+                       }
+                   />
+                   <Route
+                       path="/seller-dashboard"
+                       element={
+                           <ProtectedRoute allowedRoles={['seller']}>
+                               <SellerDashboard />
+                           </ProtectedRoute>
+                       }
+                   />
                </Routes>
            </BrowserRouter>
         </>

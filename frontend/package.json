@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
+    "axios": "^1.10.0",
+    "formik": "^2.4.6",
     "lucide-react": "^0.515.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -19,7 +21,8 @@
     "react-router-dom": "^7.6.2",
     "react-toastify": "^11.0.5",
     "remixicon": "^4.6.0",
-    "router": "^2.2.0"
+    "router": "^2.2.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
