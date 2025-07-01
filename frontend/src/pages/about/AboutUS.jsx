@@ -10,7 +10,7 @@ const AboutUs = () => {
         <>
             <AboutUsBanner/>
             <HospitalityAboutSection/>
-                <TestimonialsSection/>
+            <TestimonialsSection/>
             <LogoSection/>
             <TestimonialsSlider/>
 

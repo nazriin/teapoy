@@ -73,7 +73,6 @@ const TestimonialsSection = () => {
     return (
         <section className="py-16 px-4 bg-white">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <div className="mb-12">
                     <p className="text-sm font-medium text-gray-600 uppercase tracking-wider mb-2">
                         TESTIMONIALS
@@ -83,14 +82,12 @@ const TestimonialsSection = () => {
                     </h2>
                 </div>
 
-                {/* Cards Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {testimonials.map((person, index) => (
                         <div
                             key={index}
                             className="group relative overflow-hidden rounded-2xl bg-gray-100 shadow-lg hover:shadow-xl transition-all duration-300"
                         >
-                            {/* Image Container */}
                             <div className="relative aspect-[4/5] overflow-hidden">
                                 <img
                                     src={person.image}
@@ -98,7 +95,6 @@ const TestimonialsSection = () => {
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
 
-                                {/* Social Media Overlay */}
                                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                                     <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                                         <SocialIcon type="facebook" href={person.socialLinks.facebook} />
@@ -108,11 +104,9 @@ const TestimonialsSection = () => {
                                     </div>
                                 </div>
 
-                                {/* Gradient Overlay for Text */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/50 to-transparent h-24"></div>
                             </div>
 
-                            {/* Text Content */}
                             <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                                 <h3 className="text-xl font-semibold mb-1">{person.name}</h3>
                                 <p className="text-gray-300 text-sm font-medium">{person.role}</p>

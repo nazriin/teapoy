@@ -1,273 +1,7 @@
-// import React, { useState } from 'react';
-// import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Music } from 'lucide-react';
-//
-// const ContactSection = () => {
-//     const [formData, setFormData] = useState({
-//         name: '',
-//         phone: '',
-//         email: '',
-//         message: '',
-//         consent: false
-//     });
-//
-//     const handleInputChange = (e) => {
-//         const { name, value, type, checked } = e.target;
-//         setFormData(prev => ({
-//             ...prev,
-//             [name]: type === 'checkbox' ? checked : value
-//         }));
-//     };
-//
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         console.log('Form submitted:', formData);
-//         // Handle form submission logic here
-//     };
-//
-//     return (
-//         <>
-//         <section className="relative h-[390px] bg-gradient-to-br from-amber-900 via-amber-800 to-orange-900 overflow-hidden">
-//             {/* Background Image Container */}
-//             <div className="absolute inset-0">
-//                 <img
-//                     src="https://wellingtons-hotel.myshopify.com/cdn/shop/files/breadcrumb.png?v=1742451376"
-//                     alt="Luxurious interior with warm lighting and wooden panels"
-//                     className="w-full h-full object-cover opacity-60"
-//                 />
-//                 <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10"></div>
-//             </div>
-//
-//             {/* Content Container */}
-//             <div className="relative z-10 flex flex-col justify-center h-full px-4 sm:px-6 lg:px-8">
-//                 <div className="max-w-7xl mx-auto w-full">
-//                     <div className="text-center mb-8 lg:mb-12">
-//                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-wider">
-//                             Contact Us
-//                         </h1>
-//                     </div>
-//                 </div>
-//             </div>
-//
-//             {/* Subtle Pattern Overlay */}
-//             <div className="absolute inset-0 opacity-10 pointer-events-none">
-//                 <div
-//                     className="w-full h-full"
-//                     style={{
-//                         backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-//                         backgroundSize: '50px 50px'
-//                     }}
-//                 ></div>
-//             </div>
-//         </section>
-//         <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-//             <div className="max-w-7xl mx-auto">
-//                 {/* Main container with responsive grid layout */}
-//                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-//
-//                     {/* Left Section - Contact Form */}
-//                     <div className="bg-white rounded-lg shadow-sm p-8">
-//                         <h2 className="text-3xl font-bold text-gray-900 mb-8">Get in Touch</h2>
-//
-//                         <form onSubmit={handleSubmit} className="space-y-6">
-//                             {/* Name Field */}
-//                             <div>
-//                                 <label htmlFor="name" className="block text-sm font-medium text-amber-600 mb-2">
-//                                     Your Name
-//                                 </label>
-//                                 <div className="relative">
-//                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-//                                         <svg className="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-//                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-//                                         </svg>
-//                                     </div>
-//                                     <input
-//                                         type="text"
-//                                         id="name"
-//                                         name="name"
-//                                         value={formData.name}
-//                                         onChange={handleInputChange}
-//                                         placeholder="Your Name"
-//                                         className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-//                                     />
-//                                 </div>
-//                             </div>
-//
-//                             {/* Phone Field */}
-//                             <div>
-//                                 <label htmlFor="phone" className="block text-sm font-medium text-amber-600 mb-2">
-//                                     Your Phone
-//                                 </label>
-//                                 <div className="relative">
-//                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-//                                         <Phone className="h-5 w-5 text-gray-400" />
-//                                     </div>
-//                                     <input
-//                                         type="tel"
-//                                         id="phone"
-//                                         name="phone"
-//                                         value={formData.phone}
-//                                         onChange={handleInputChange}
-//                                         placeholder="Phone Number"
-//                                         className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-//                                     />
-//                                 </div>
-//                             </div>
-//
-//                             {/* Email Field */}
-//                             <div>
-//                                 <label htmlFor="email" className="block text-sm font-medium text-amber-600 mb-2">
-//                                     Email
-//                                 </label>
-//                                 <div className="relative">
-//                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-//                                         <Mail className="h-5 w-5 text-gray-400" />
-//                                     </div>
-//                                     <input
-//                                         type="email"
-//                                         id="email"
-//                                         name="email"
-//                                         value={formData.email}
-//                                         onChange={handleInputChange}
-//                                         placeholder="Email Address"
-//                                         className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-//                                     />
-//                                 </div>
-//                             </div>
-//
-//                             {/* Message Field */}
-//                             <div>
-//                                 <label htmlFor="message" className="block text-sm font-medium text-amber-600 mb-2">
-//                                     Special Message
-//                                 </label>
-//                                 <textarea
-//                                     id="message"
-//                                     name="message"
-//                                     rows={6}
-//                                     value={formData.message}
-//                                     onChange={handleInputChange}
-//                                     placeholder="Write Your Message..."
-//                                     className="block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm resize-none"
-//                                 />
-//                             </div>
-//
-//                             {/* Consent Checkbox */}
-//                             <div className="flex items-start">
-//                                 <div className="flex items-center h-5">
-//                                     <input
-//                                         id="consent"
-//                                         name="consent"
-//                                         type="checkbox"
-//                                         checked={formData.consent}
-//                                         onChange={handleInputChange}
-//                                         className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
-//                                     />
-//                                 </div>
-//                                 <div className="ml-3 text-sm">
-//                                     <label htmlFor="consent" className="text-gray-700">
-//                                         I consent to the collection and storage of my data.
-//                                     </label>
-//                                 </div>
-//                             </div>
-//
-//                             {/* Submit Button */}
-//                             <div>
-//                                 <button
-//                                     type="submit"
-//                                     className="w-full sm:w-auto px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
-//                                 >
-//                                     Send Message
-//                                 </button>
-//                             </div>
-//                         </form>
-//                     </div>
-//
-//                     {/* Right Section - Contact Information */}
-//                     <div className="bg-gray-100 rounded-lg p-8">
-//                         <h2 className="text-3xl font-bold text-gray-900 mb-8">Where to Find Us</h2>
-//
-//                         <div className="space-y-8">
-//                             {/* Reservations */}
-//                             <div>
-//                                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Reservations</h3>
-//                                 <div className="space-y-3">
-//                                     <div className="flex items-center">
-//                                         <Phone className="h-5 w-5 text-gray-600 mr-3 flex-shrink-0" />
-//                                         <span className="text-gray-700">+1 212-555-6789</span>
-//                                     </div>
-//                                     <div className="flex items-center">
-//                                         <Mail className="h-5 w-5 text-gray-600 mr-3 flex-shrink-0" />
-//                                         <span className="text-gray-700">exampleinfo@gmail.com</span>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//
-//                             {/* Location */}
-//                             <div>
-//                                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Location</h3>
-//                                 <div className="flex items-start">
-//                                     <MapPin className="h-5 w-5 text-gray-600 mr-3 flex-shrink-0 mt-1" />
-//                                     <div className="text-gray-700">
-//                                         <div>3949 State Route 38B,</div>
-//                                         <div>Newark Valley, NY 13811, USA</div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//
-//                             {/* Social Network */}
-//                             <div>
-//                                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Social Network</h3>
-//                                 <div className="flex space-x-4">
-//                                     {/* Facebook */}
-//                                     <a
-//                                         href="#"
-//                                         className="p-3 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow duration-200 text-gray-600 hover:text-blue-600"
-//                                         aria-label="Facebook"
-//                                     >
-//                                         <Facebook className="h-5 w-5" />
-//                                     </a>
-//
-//                                     {/* Twitter */}
-//                                     <a
-//                                         href="#"
-//                                         className="p-3 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow duration-200 text-gray-600 hover:text-blue-400"
-//                                         aria-label="Twitter"
-//                                     >
-//                                         <Twitter className="h-5 w-5" />
-//                                     </a>
-//
-//                                     {/* Instagram */}
-//                                     <a
-//                                         href="#"
-//                                         className="p-3 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow duration-200 text-gray-600 hover:text-pink-600"
-//                                         aria-label="Instagram"
-//                                     >
-//                                         <Instagram className="h-5 w-5" />
-//                                     </a>
-//
-//                                     {/* Music/TikTok */}
-//                                     <a
-//                                         href="#"
-//                                         className="p-3 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow duration-200 text-gray-600 hover:text-purple-600"
-//                                         aria-label="Music Platform"
-//                                     >
-//                                         <Music className="h-5 w-5" />
-//                                     </a>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//         </>
-//     );
-// };
-//
-// export default ContactSection;
+
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Music, Send, Clock, AlertCircle } from 'lucide-react';
 
-// Formik və Yup simulasiyası (Claude.ai-də əsl kitabxanalar yoxdur)
 const useFormik = (config) => {
     const [values, setValues] = useState(config.initialValues);
     const [errors, setErrors] = useState({});
@@ -281,7 +15,6 @@ const useFormik = (config) => {
             [name]: type === 'checkbox' ? checked : value
         }));
 
-        // Clear error when user starts typing
         if (errors[name]) {
             setErrors(prev => ({ ...prev, [name]: '' }));
         }
@@ -291,7 +24,6 @@ const useFormik = (config) => {
         const { name } = e.target;
         setTouched(prev => ({ ...prev, [name]: true }));
 
-        // Validate field on blur
         if (config.validationSchema) {
             const fieldErrors = validateField(name, values[name]);
             setErrors(prev => ({ ...prev, ...fieldErrors }));
@@ -301,7 +33,6 @@ const useFormik = (config) => {
     const validateField = (fieldName, value) => {
         const errors = {};
 
-        // Simple validation rules (Yup simulation)
         switch (fieldName) {
             case 'name':
                 if (!value || value.trim().length === 0) {
@@ -393,14 +124,12 @@ const ContactSection = () => {
         },
         onSubmit: async (values) => {
             try {
-                // Simulate API call
                 await new Promise(resolve => setTimeout(resolve, 2000));
 
                 console.log('Form submitted:', values);
                 setSubmitStatus('success');
                 formik.resetForm();
 
-                // Clear success message after 5 seconds
                 setTimeout(() => setSubmitStatus(''), 5000);
             } catch (error) {
                 setSubmitStatus('error');
@@ -415,9 +144,7 @@ const ContactSection = () => {
 
     return (
         <>
-            {/* Hero Section */}
             <section className="relative h-[500px] bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
-                {/* Animated Background */}
                 <div className="absolute inset-0">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"></div>
                     <div className="absolute inset-0 opacity-30">
@@ -425,14 +152,12 @@ const ContactSection = () => {
                     </div>
                 </div>
 
-                {/* Floating Elements */}
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute top-20 left-10 w-32 h-32 bg-blue-400/10 rounded-full blur-xl animate-pulse"></div>
                     <div className="absolute bottom-20 right-20 w-40 h-40 bg-purple-400/10 rounded-full blur-xl animate-pulse delay-1000"></div>
                     <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-indigo-400/10 rounded-full blur-xl animate-pulse delay-500"></div>
                 </div>
 
-                {/* Content */}
                 <div className="relative z-10 flex flex-col justify-center h-full px-6 lg:px-8">
                     <div className="max-w-4xl mx-auto text-center">
                         <div className="mb-6">
@@ -453,7 +178,6 @@ const ContactSection = () => {
                     </div>
                 </div>
 
-                {/* Geometric Pattern */}
                 <div className="absolute inset-0 opacity-10">
                     <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                         <defs>
@@ -466,15 +190,12 @@ const ContactSection = () => {
                 </div>
             </section>
 
-            {/* Main Content */}
             <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
-                        {/* Contact Form */}
                         <div className="relative">
                             <div className="bg-white rounded-3xl shadow-2xl shadow-gray-900/10 p-8 lg:p-10 relative overflow-hidden">
-                                {/* Form Background Pattern */}
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full -translate-y-16 translate-x-16"></div>
 
                                 <div className="relative z-10">
@@ -483,7 +204,6 @@ const ContactSection = () => {
                                         <p className="text-gray-600">Fill out the form below and we'll get back to you shortly.</p>
                                     </div>
 
-                                    {/* Status Messages */}
                                     {submitStatus === 'success' && (
                                         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-2xl">
                                             <div className="flex items-center">
@@ -507,7 +227,6 @@ const ContactSection = () => {
                                     )}
 
                                     <div onSubmit={formik.handleSubmit} className="space-y-6">
-                                        {/* Name & Phone Grid */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>
                                                 <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -566,7 +285,6 @@ const ContactSection = () => {
                                             </div>
                                         </div>
 
-                                        {/* Email */}
                                         <div>
                                             <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                                                 Email Address *
@@ -593,7 +311,7 @@ const ContactSection = () => {
                                             )}
                                         </div>
 
-                                        {/* Message */}
+
                                         <div>
                                             <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
                                                 Your Message *
@@ -620,7 +338,7 @@ const ContactSection = () => {
                                             )}
                                         </div>
 
-                                        {/* Consent */}
+
                                         <div>
                                             <div className="flex items-start">
                                                 <div className="flex items-center h-6">
@@ -650,7 +368,7 @@ const ContactSection = () => {
                                             )}
                                         </div>
 
-                                        {/* Submit Button */}
+
                                         <button
                                             type="button"
                                             onClick={formik.handleSubmit}
@@ -679,11 +397,8 @@ const ContactSection = () => {
                             </div>
                         </div>
 
-                        {/* Contact Information */}
                         <div className="space-y-8">
-                            {/* Contact Cards */}
                             <div className="space-y-6">
-                                {/* Phone Card */}
                                 <div className="group bg-white rounded-2xl shadow-lg shadow-gray-900/5 p-6 hover:shadow-xl hover:shadow-gray-900/10 transition-all duration-300 border border-gray-100">
                                     <div className="flex items-center">
                                         <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -699,7 +414,6 @@ const ContactSection = () => {
                                     </div>
                                 </div>
 
-                                {/* Email Card */}
                                 <div className="group bg-white rounded-2xl shadow-lg shadow-gray-900/5 p-6 hover:shadow-xl hover:shadow-gray-900/10 transition-all duration-300 border border-gray-100">
                                     <div className="flex items-center">
                                         <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -715,7 +429,6 @@ const ContactSection = () => {
                                     </div>
                                 </div>
 
-                                {/* Location Card */}
                                 <div className="group bg-white rounded-2xl shadow-lg shadow-gray-900/5 p-6 hover:shadow-xl hover:shadow-gray-900/10 transition-all duration-300 border border-gray-100">
                                     <div className="flex items-start">
                                         <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
@@ -732,7 +445,6 @@ const ContactSection = () => {
                                     </div>
                                 </div>
 
-                                {/* Hours Card */}
                                 <div className="group bg-white rounded-2xl shadow-lg shadow-gray-900/5 p-6 hover:shadow-xl hover:shadow-gray-900/10 transition-all duration-300 border border-gray-100">
                                     <div className="flex items-center">
                                         <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -747,7 +459,6 @@ const ContactSection = () => {
                                 </div>
                             </div>
 
-                            {/* Social Media */}
                             <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
                                 <h3 className="text-2xl font-bold mb-4">Follow Us</h3>
                                 <p className="text-gray-300 mb-6">Stay connected with us on social media</p>

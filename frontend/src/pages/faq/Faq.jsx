@@ -68,7 +68,6 @@ export default function FAQAccordion() {
     const [touched, setTouched] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // Validation functions
     const validateName = (name) => {
         if (!name.trim()) return 'The field is required.';
         if (name.trim().length < 2) return 'Name must be at least 2 characters';
@@ -102,7 +101,6 @@ export default function FAQAccordion() {
     const handleInputChange = (field, value) => {
         setFormData(prev => ({ ...prev, [field]: value }));
 
-        // Real-time validation
         if (touched[field]) {
             const error = field === 'name' ? validateName(value) :
                 field === 'email' ? validateEmail(value) :
@@ -125,7 +123,6 @@ export default function FAQAccordion() {
         if (validateForm()) {
             setIsSubmitting(true);
 
-            // Simulate API call
             setTimeout(() => {
                 alert('Mesajınız gönderildi!');
                 setFormData({ name: '', email: '', message: '' });
@@ -140,7 +137,6 @@ export default function FAQAccordion() {
     return (
         <>
             <section className="relative h-[390px] bg-gradient-to-br from-amber-900 via-amber-800 to-orange-900 overflow-hidden">
-                {/* Background Image Container */}
                 <div className="absolute inset-0">
                     <img
                         src="https://wellingtons-hotel.myshopify.com/cdn/shop/files/breadcrumb.png?v=1742451376"
@@ -150,7 +146,6 @@ export default function FAQAccordion() {
                     <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10"></div>
                 </div>
 
-                {/* Content Container */}
                 <div className="relative z-10 flex flex-col justify-center h-full px-4 sm:px-6 lg:px-8">
                     <div className="max-w-7xl mx-auto w-full">
                         <div className="text-center mb-8 lg:mb-12">
@@ -161,7 +156,6 @@ export default function FAQAccordion() {
                     </div>
                 </div>
 
-                {/* Subtle Pattern Overlay */}
                 <div className="absolute inset-0 opacity-10 pointer-events-none">
                     <div
                         className="w-full h-full"
@@ -175,7 +169,6 @@ export default function FAQAccordion() {
             <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4 md:p-8">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                        {/* Categories Sidebar */}
                         <div className="lg:col-span-1">
                             <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
                                 <h2 className="text-2xl font-bold text-gray-800 mb-6">Categories</h2>
@@ -198,10 +191,8 @@ export default function FAQAccordion() {
                             </div>
                         </div>
 
-                        {/* FAQ Content */}
                         <div className="lg:col-span-3">
                             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                                {/* Header */}
                                 <div className="bg-gradient-to-r from-amber-700 to-amber-800 p-6 md:p-8">
                                     <div className="flex items-center gap-3 mb-2">
                                         {getCategoryIcon(activeCategory)}
@@ -214,7 +205,6 @@ export default function FAQAccordion() {
                                     </p>
                                 </div>
 
-                                {/* FAQ Items */}
                                 <div className="p-6 md:p-8">
                                     <div className="space-y-4">
                                         {faqData[activeCategory]?.map((faq) => {
@@ -265,7 +255,6 @@ export default function FAQAccordion() {
                                 </div>
                             </div>
 
-                            {/* Back to Top Button */}
 
                         </div>
                     </div>
@@ -273,7 +262,6 @@ export default function FAQAccordion() {
             </div>
             <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50 py-8 px-4">
                 <div className="max-w-2xl mx-auto">
-                    {/* Header */}
                     <div className="text-center mb-8">
                         <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
                             Didn't find the answer?
@@ -283,12 +271,9 @@ export default function FAQAccordion() {
                         </p>
                     </div>
 
-                    {/* Form */}
                     <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
                         <div className="space-y-6">
-                            {/* Name and Email Row */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                                {/* Name Field */}
                                 <div className="space-y-2">
                                     <input
                                         type="text"
@@ -307,7 +292,6 @@ export default function FAQAccordion() {
                                     )}
                                 </div>
 
-                                {/* Email Field */}
                                 <div className="space-y-2">
                                     <input
                                         type="email"
@@ -327,7 +311,6 @@ export default function FAQAccordion() {
                                 </div>
                             </div>
 
-                            {/* Message Field */}
                             <div className="space-y-2">
               <textarea
                   placeholder="Message"
@@ -346,7 +329,6 @@ export default function FAQAccordion() {
                                 )}
                             </div>
 
-                            {/* Submit Button */}
                             <div className="flex flex-col space-y-4">
                                 <button
                                     onClick={handleSubmit}
@@ -363,7 +345,6 @@ export default function FAQAccordion() {
                                     )}
                                 </button>
 
-                                {/* Privacy Notice */}
                                 <p className="text-sm text-gray-500 text-center md:text-left">
                                     *We promise not to disclose your personal information to third parties.
                                 </p>

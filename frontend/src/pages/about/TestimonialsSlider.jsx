@@ -1,7 +1,6 @@
 import React from 'react';
 
 const TestimonialsSlider = () => {
-    // Insert your image URLs here
     const testimonials = [
         {
             id: 1,
