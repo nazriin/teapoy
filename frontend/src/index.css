@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Prompt", sans-serif;
+}
+/* index.css or global.css */
+
+/* Base styles for light mode */
+body {
+    background-color: #FCF2EF; /* Light background for the whole page */
+    color: #1a1a1a; /* Dark text for light mode */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Styles for dark mode */
+html.dark body {
+    background-color: #111827; /* Dark background for the whole page */
+    color: #e0e0e0; /* Light text for dark mode */
+}
+
+/* Ensure the root element covers the full height */
+#root { /* If your React app mounts to a div with id="root" */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

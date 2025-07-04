@@ -1,17 +1,20 @@
 import React from 'react'
 import Slider from "./home_components/Slider.jsx";
-import FurnitureShowcase from "./home_components/FurnitureShowcase.jsx";
-import Banner from "./home_components/Banner.jsx";
-import AccordionComponent from "./home_components/AccordionComponent.jsx";
+import Services from "./home_components/Services.jsx";
+import Favorites from "./home_components/Favorites.jsx";
+import BlogSec from "./home_components/BlogSec.jsx";
+import FaqSec from "./home_components/FaqSec.jsx";
+import Adoption from "../adoption/Adoption.jsx";
 
 const Home = () => {
     return (
         <div>
-            <Slider/>
-            <FurnitureShowcase/>
-            <Banner/>
-            <AccordionComponent/>
-
+        <Slider/>
+            <Services/>
+            <Favorites/>
+            <BlogSec/>
+            <FaqSec/>
+            <Adoption/>
         </div>
     )
 }
