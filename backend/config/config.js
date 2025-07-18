@@ -12,3 +12,5 @@ export const connectDB = async()=>{
         console.log(error)
     }
 }
+
+// MONGO_URI=mongodb+srv://babazadenazrin22:DEj31zJANURH1zwf@cluster0.8owspnh.mongodb.net/
